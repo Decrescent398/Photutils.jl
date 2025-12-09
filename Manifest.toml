@@ -1,0 +1,10 @@
+# This file is machine-generated - editing it directly is not advised
+
+julia_version = "1.12.1"
+manifest_format = "2.0"
+project_hash = "c08c55e716ca4d734f91406c9f44a26c1c321af9"
+
+[[deps.Photutils]]
+path = "."
+uuid = "0af7feb3-9ebb-49d6-ba68-d375c82e2d55"
+version = "1.0.0-DEV"
