@@ -205,8 +205,8 @@ end
     
     return BoundingBox(min(box.ixmin, other.ixmin),
                         max(box.ixmax, other.ixmax),
-                        min(box.iymin, other.iymax),
-                        max(box.iymax, other.ixmax))
+                        min(box.iymin, other.iymin),
+                        max(box.iymax, other.iymax))
 
 end
 
