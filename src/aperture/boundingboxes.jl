@@ -21,7 +21,7 @@ export BoundingBox,
     from_float,
     center, 
     shape,
-    overlap_slices,
+    get_overlap_slices,
     extent,
     union,
     intersection
