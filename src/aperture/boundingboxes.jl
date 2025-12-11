@@ -175,11 +175,11 @@ function get_overlap_slices(box::BoundingBox, ny::Int, nx::Int)
         return nothing, nothing
     end
     
-    y_slices_large = max(ymin, 0) : min(ymax, ny)
-    x_slices_large = max(xmin, 0) : min(xmax, nx)
+    y_slices_large = max(ymin, 0) + 1: min(ymax, ny)
+    x_slices_large = max(xmin, 0) + 1: min(xmax, nx)
 
-    y_slices_small = max(1 - ymin, 1) : min(ymax - ymin, ny - ymin)
-    x_slices_small = max(1 - xmin, 0) : min(xmax - xmin, nx - xmin)
+    y_slices_small = max(1 - ymin, 1) + 1: min(ymax - ymin, ny - ymin)
+    x_slices_small = max(1 - xmin, 0) + 1: min(xmax - xmin, nx - xmin)
 
     return (y_slices_large, x_slices_large), (y_slices_small, x_slices_small)
 
