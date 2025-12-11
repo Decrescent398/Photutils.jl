@@ -135,7 +135,7 @@ The ``(ny, nx)`` shape of the bounding box as tuple.
     return (box.ixmin - 0.5,
             box.ixmax - 0.5,
             box.iymin - 0.5,
-            box.ymax - 0.5)
+            box.iymax - 0.5)
     
 end
 
