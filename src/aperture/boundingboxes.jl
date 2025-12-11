@@ -128,8 +128,7 @@ The ``(ny, nx)`` shape of the bounding box as tuple.
 
     The upper edges here are the actual pixel positions of the
     edges, i.e., they are not "exclusive" indices used for python
-    indexing. The extent is useful for plotting the bounding box
-    using Matplotlib.
+    indexing. The extent is useful for plotting the bounding box.
     """
 
     return (box.ixmin - 0.5,
