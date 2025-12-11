@@ -117,7 +117,7 @@ The ``(ny, nx)`` shape of the bounding box as tuple.
 """
 
 @inline shape(box::BoundingBox) = (box.iymax - box.iymin, 
-                                    box.ixmax - box.iymin)
+                                    box.ixmax - box.ixmin)
 
 @inline function extent(box::BoundingBox)
 
