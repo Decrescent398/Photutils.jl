@@ -2,6 +2,19 @@
 Most of this work is derived from astropy/photutils. The relevant derivations
 are considered under the BSD 3-clause license. =#
 
+#=
+Most of this comes from 
+https://github.com/astropy/photutils/blob/main/photutils/aperture/bounding_box.py =#
+
+#= 
+Major Improvements:
+1. Static typing
+2. Inline functions
+3. UnitRange allocation
+4. No temp objects =#
+
+#TODO: Write Plotting functions with photutils.rectangle and makie
+
 module boundingboxes
 
 export BoundingBox,
