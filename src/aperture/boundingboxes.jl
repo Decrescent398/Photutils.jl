@@ -108,7 +108,7 @@ end
     y_center = 0.5 * (box.iymax - 1 + box.iymin)
     x_center = 0.5 * (box.ixmax - 1 + box.ixmin)
 
-    return @SVector [yc, xc]
+    return @SVector [y_center, x_center]
 
 end
 
