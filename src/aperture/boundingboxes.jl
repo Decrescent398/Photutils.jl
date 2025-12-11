@@ -147,8 +147,7 @@ function get_overlap_slices(box::BoundingBox, ny::Int, nx::Int)
 
     Parameters
     ----------
-    shape : 2-tuple of int
-        The shape of the 2D array.
+    ny, nx: Shape of Array
 
     Returns
     -------
