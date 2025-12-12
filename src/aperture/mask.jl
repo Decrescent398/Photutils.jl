@@ -33,14 +33,14 @@ function ApertureMask(data::AbstractArray{<:Real, 2}, box::BoundingBox)
     """
 
     data_arr = Array(data)
-    if size(data) != size(box) 
+    if size(data) != shape(box) 
         throw(ArgumentError("Mask data and bounding box must have the same size"))
     end
 
     mask = (data_arr .> 0)
 
     return ApertureMask(data_arr,
-                        bbox,
+                        box,
                         mask
     )
 
