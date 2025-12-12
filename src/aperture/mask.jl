@@ -2,6 +2,17 @@
 Most of this work is derived from astropy/photutils. The relevant derivations
 are considered under the BSD 3-clause license. =#
 
+#= Most of this is from
+https://github.com/astropy/photutils/blob/main/photutils/aperture/mask.py =#
+
+#=
+Major Improvements:
+1. Static typing
+2. Inline functions
+3. Views
+4. Bitmatrix
+5. No overhead for Warnings =#
+
 module mask
 
 export ApertureMask
