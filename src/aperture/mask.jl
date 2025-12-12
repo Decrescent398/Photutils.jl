@@ -329,4 +329,4 @@ function get_values(mask::ApertureMask, data::AbstractArray{<:Real,2}; _mask=not
 
 end
 
-end
+end #module
