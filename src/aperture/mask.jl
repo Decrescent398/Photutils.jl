@@ -37,7 +37,7 @@ function ApertureMask(data::AbstractArray{<:Real, 2}, box::BoundingBox)
         throw(ArgumentError("Mask data and bounding box must have the same size"))
     end
 
-    mask = (data_arr .== 0)
+    mask = BitMatrix(data_arr .== 0)
 
     return ApertureMask(data_arr,
                         box,
