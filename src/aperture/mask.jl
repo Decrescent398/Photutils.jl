@@ -22,8 +22,8 @@ using BitArrays
 using .boundingboxes: BoundingBox, get_overlap_slices, shape
 
 struct ApertureMask
-    data::Matrix{Float64}
     box::BoundingBox
+    data::Matrix{Float64}
     mask::BitMatrix
 
 end
