@@ -11,7 +11,8 @@ Major Improvements:
 2. Inline functions
 3. Views
 4. Bitmatrix
-5. No overhead for Warnings =#
+5. No overhead for Warnings 
+6. Type Stability=#
 
 module mask
 
@@ -109,12 +110,12 @@ function to_image(mask::ApertureMask, ny::Int, nx::Int; dtype=Float64)
 
     Returns
     -------
-    result : A 2D array of the mask.
+    result : A 2D array of the mask or empty matrix
     """
 
     slices_large, slices_small = get_overlap_slices(mask.box, ny, nx)
-    if slices_small === nothing
-        return nothing
+    if isempty(slices_small)
+        return zeros(Float64, 0, 0)
     end
 
     image = zeros(dtype, ny, nx)
@@ -149,20 +150,20 @@ function cutout(mask::ApertureMask, data::AbstractArray{<:Real,2}; fill_value=0.
 
     Returns
     -------
-    result : `array` or `None`
+    result : `array` or empty array of same size as cutout
         A 2D array cut out from the input ``data`` representing
         the same cutout region as the aperture mask. If there is a
         partial overlap of the aperture mask with the input data,
         pixels outside the data will be assigned to ``fill_value``.
-        `None` is returned if there is no overlap of the aperture
-        with the input ``data``.
+        An empty array of th same size as cutout is returned if 
+        there is no overlap of the aperture with the input ``data``.
     """
     
     ny, nx = size(data)
     slices_large, slices_small = get_overlap_slices(mask, ny, nx)
 
-    if slices_small === nothing
-        return nothing
+    if isempty(slices_small)
+        return zeros(Float64, length.(slices_large)...)
     end
 
     cutout_size = (length(first(slices_small)), length(last(slices_small)))
@@ -207,19 +208,19 @@ function multiply(mask::ApertureMask, data::AbstractArray{<:Real,2}; fill_value=
 
     Returns
     -------
-    result : `array` or `None`
+    result : `array` or empty array of same size as c
         A 2D mask-weighted cutout from the input ``data``. If
         there is a partial overlap of the aperture mask with the
         input data, pixels outside the data will be assigned to
-        ``fill_value`` before being multiplied with the mask. `None`
-        is returned if there is no overlap of the aperture with the
-        input ``data``.
+        ``fill_value`` before being multiplied with the mask. An 
+        empty array of th same size as cutout is returned if there 
+        is no overlap of the aperture with the input ``data``.
     """
 
     c = cutout(mask, data; fill_value=fill_value, copy=False)
     
-    if c === nothing
-        return nothing
+    if isempty(c)
+        return zeros(Float64, size(c)...)
     end
 
     weighted_cutout = c .* mask.data
@@ -275,8 +276,8 @@ function _get_overlap_cutouts(mask::ApertureMask, ny::Int, nx::Int; _mask=nothin
 
     slc_large, slc_small = get_overlap_slices(mask, ny, nx)
     
-    if slc_large === nothing
-        return nothing, nothing, nothing
+    if isempty(slc_large)
+        return Float64[], Float64[], Float64[]
     end
 
     aper_weights = mask.data[slc_small]
@@ -321,8 +322,8 @@ function get_values(mask::ApertureMask, data::AbstractArray{<:Real,2}; _mask=not
     ny, nx = size(data)
     slc_large, aper_weights, pixel_mask = _get_overlap_cutouts(mask, ny, nx; _mask=_mask)
 
-    if slc_large === nothing
-        return Float64[]
+    if isempty(slc_large)
+        return Vector{Float64}(undef, 0)
     end
     
     return (aper_weights .* data[slc_large])[pixel_mask]
