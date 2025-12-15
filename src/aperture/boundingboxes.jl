@@ -16,17 +16,6 @@ Major Improvements:
 
 #TODO: Write Plotting functions with photutils.rectangle and makie
 
-module boundingboxes
-
-export BoundingBox,
-    from_float,
-    center, 
-    shape,
-    get_overlap_slices,
-    extent,
-    union,
-    intersection
-
 using StaticArrays
 
 """
@@ -239,5 +228,3 @@ end
     return BoundingBox(ixmin, ixmax, iymin, iymax)
 
 end
-
-end #module

@@ -1,5 +1,9 @@
 module Photutils
 
-# Write your package code here.
+using Reexport
 
-end
+include("aperture/Apertures.jl")
+
+@reexport using .Apertures
+
+end #module

@@ -14,13 +14,6 @@ Major Improvements:
 5. No overhead for Warnings 
 6. Type Stability=#
 
-module mask
-
-export ApertureMask
-
-using BitArrays
-using .boundingboxes: BoundingBox, get_overlap_slices, shape
-
 struct ApertureMask
     box::BoundingBox
     data::Matrix{Float64}
@@ -329,5 +322,3 @@ function get_values(mask::ApertureMask, data::AbstractArray{<:Real,2}; _mask=not
     return (aper_weights .* data[slc_large])[pixel_mask]
 
 end
-
-end #module
