@@ -51,8 +51,8 @@ function ApertureMask(data::AbstractArray{<:Real, 2}, box::BoundingBox)
 
     mask = BitMatrix(data_arr .== 0)
 
-    return ApertureMask(data_arr,
-                        box,
+    return ApertureMask(box,
+                        data_arr,
                         mask
     )
 
