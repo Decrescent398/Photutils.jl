@@ -11,7 +11,8 @@ Major Improvements:
 1. Static typing
 2. Inline functions
 3. UnitRange allocation
-4. No temp objects =#
+4. No temp objects 
+5. Type Stability=#
 
 #TODO: Write Plotting functions with photutils.rectangle and makie
 
@@ -157,10 +158,10 @@ function get_overlap_slices(box::BoundingBox, ny::Int, nx::Int)
         `None` is returned if there is no overlap of the bounding
         box with the given image shape.
 
-    slices_small : tuple of slices or `None`
+    slices_small : tuple of slices or `empty`
         A tuple of slice objects for each axis of an array enclosed
         by the bounding box such that ``small_array[slices_small]``
-        extracts the region that is inside the large array. `None`
+        extracts the region that is inside the large array. `empty`
         is returned if there is no overlap of the bounding box with
         the given image shape.
     """
@@ -170,7 +171,7 @@ function get_overlap_slices(box::BoundingBox, ny::Int, nx::Int)
 
     #No overlap
     if xmin >= nx || ymin >= ny || xmax <= 0 || ymax <= 0
-        return nothing, nothing
+        return (empty, empty), (empty, empty)
     end
     
     y_slices_large = max(ymin, 0) + 1: min(ymax, ny)
@@ -223,7 +224,7 @@ end
     -------
     result : `BoundingBox`
         A `BoundingBox` representing the intersection of the input
-        `BoundingBox` with this one.
+        `BoundingBox` with this one or an empty BoundingBox
     """
 
     ixmin = max(box.ixmin, other.ixmin)
@@ -232,7 +233,7 @@ end
     iymax = min(box.iymax, other.iymax)
 
     if ixmax < ixmin || iymax < iymin
-        return nothing
+        return BoundingBox(1, 0, 1, 0) #empty range
     end
 
     return BoundingBox(ixmin, ixmax, iymin, iymax)
