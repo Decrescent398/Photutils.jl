@@ -171,7 +171,7 @@ function get_overlap_slices(box::BoundingBox, ny::Int, nx::Int)
 
     #No overlap
     if xmin >= nx || ymin >= ny || xmax <= 0 || ymax <= 0
-        return (empty, empty), (empty, empty)
+        return (Float64[], Float64[]), (Float64[], Float64[])
     end
     
     y_slices_large = max(ymin, 0) + 1: min(ymax, ny)
